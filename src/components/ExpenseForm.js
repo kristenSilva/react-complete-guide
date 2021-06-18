@@ -22,14 +22,13 @@ const ExpenseForm = (props) => {
         [name]: value //just this would remove any value not updated
       }
     })
-    //console.log(userInput);
   }
 
   const submitHandler = (e) => {
     e.preventDefault();
     const expenseData = {
       title: userInput.title,
-      amount: userInput.amount,
+      amount: +userInput.amount, //+ converts string to number
       date: new Date(userInput.date.replace(/-/g, '/'))
     }
     //passes expenseData UP to NewExpense component 
@@ -42,6 +41,13 @@ const ExpenseForm = (props) => {
     })
   
   }
+
+  // const cancelHandler = () => {
+  //   console.log("clicked cancel")
+  //   props.onHideForm(false);
+  //   return false;
+
+  // }
 
   return(
     <form onSubmit={submitHandler}>
@@ -79,6 +85,7 @@ const ExpenseForm = (props) => {
         </div>
       </div>
       <div className="new-expense__actions">
+        <button type="button" onClick={props.onCancel}>Cancel</button>
         <button type="submit">Add Expense</button>
       </div>
     </form>
